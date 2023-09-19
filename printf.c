@@ -40,10 +40,10 @@ int _printf(const char *format, ...)
 				default:
 					break;
 			}
-			continue;
 		}
+		else
+			write(1, &c, 1);
 
-		write(1, &c, 1);
 		i++;
 		c = *(format + i);
 	}
