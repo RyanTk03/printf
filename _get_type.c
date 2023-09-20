@@ -20,7 +20,7 @@ char _get_type(char c)
 		case 's':
 			return ('s');
 
-		case '%'
+		case '%':
 			return ('%');
 
 		case 'd':
