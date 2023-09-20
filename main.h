@@ -8,5 +8,7 @@
 unsigned int _strlen(char *s);
 char _get_type(char c);
 int _printf(const char *format, ...);
+char *_intToString(int i, unsigned int *len);
+unsigned int intlen(int i);
 
 #endif /* MAIN_H_INCLUDED */

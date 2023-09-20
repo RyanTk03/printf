@@ -9,7 +9,7 @@ int _printf(const char *format, ...)
 {
 	va_list arg_list;
 	char t;
-	int i = 0;
+	int i = 0, n = 0, wn = 0;
 	char c = *(format + i);
 
 	va_start(arg_list, format);
@@ -27,24 +27,41 @@ int _printf(const char *format, ...)
 				case 'c':
 					char c_data = va_arg(arg_list, char);
 
-					write(1, &c_data, 1);
+					wn = write(1, &c_data, 1);
 					break;
 				case 's':
 					char *s_data = va_arg(arg_list, char *)
 
-					write(1, s_data, _strlen(s_data));
+					wn = write(1, s_data, _strlen(s_data));
 					break;
 				case '%':
-					write(1, "%", 1);
+					wn = write(1, "%", 1);
+					break;
+				case 'i':
+				case 'd':
+					unsigned int l = 0;
+					char *i_data = _intToString(va_arg(arg_list, int), &l);
+
+					wn = write(1, i_data, l);
+					free(i_data);
 					break;
 				default:
+					wn = 0;
 					break;
 			}
+			n += wn >= 0 ? wn : 0;
 		}
 		else
+		{
 			write(1, &c, 1);
+			n++;
+		}
 
 		i++;
 		c = *(format + i);
 	}
+
+	va_end(arg_list);
+
+	return (n);
 }
