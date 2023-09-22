@@ -49,7 +49,7 @@ int _printf(const char *format, ...)
 					free(i_data);
 					break;
 				default:
-					wn = write(1, c, 1);
+					wn = write(1, &c, 1);
 					break;
 			}
 			n += wn >= 0 ? wn : 0;
