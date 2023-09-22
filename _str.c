@@ -48,7 +48,11 @@ char *_intToString(int i, unsigned int *len)
 	s = (char *)malloc(sizeof(char) * j);
 	*len = j - 1;
 	if (s == NULL)
+	{
+		*len = 0;
 		return (NULL);
+	}
+
 	j--;
 	s[j] = '\0';
 	while (j > 0)

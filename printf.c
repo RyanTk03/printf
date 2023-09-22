@@ -32,7 +32,10 @@ int _printf(const char *format, ...)
 				case 's':
 					s_data = va_arg(arg_list, char*);
 
-					wn = write(1, s_data, _strlen(s_data));
+					if (s_data == NULL)
+						wn = write(1, "(null)", 6);
+					else
+						wn = write(1, s_data, _strlen(s_data));
 					break;
 				case '%':
 					wn = write(1, "%", 1);
@@ -46,7 +49,7 @@ int _printf(const char *format, ...)
 					free(i_data);
 					break;
 				default:
-					wn = 0;
+					wn = write(1, c, 1);
 					break;
 			}
 			n += wn >= 0 ? wn : 0;
